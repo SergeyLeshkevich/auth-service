@@ -1,0 +1,44 @@
+spring:
+  jpa:
+    generate-ddl: 'false'
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+  datasource:
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/nms_auth_service
+  main:
+    allow-circular-references: true
+  application:
+    name: auth-service
+server:
+  port: 9090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG
+
+aop:
+  logging:
+    enabled: true
+
+exception:
+  handling:
+    enabled: true
+
+security:
+  jwt:
+    secret: a2pzZGRnaGh2LGRtZmJhbGtqYmphZmJrcic7bmEgLCdlbWI7ZWFqaHJnaWhhZWk7b3Z1c2F2ay8uYW1ibHRyd2hp
+    access: 3600000
+    refresh: 2592000000
