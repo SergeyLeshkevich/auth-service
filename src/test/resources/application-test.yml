@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: test
+    password: test
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master-test.yaml
+    contexts: test
+
