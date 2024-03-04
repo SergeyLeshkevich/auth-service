@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-2
+      author: Sergey Leshkevich
+      changes:
+        - createProcedure:
+            procedureName: insert_comment_table
+            path: db/changelog/data/v1-insert-changeset-users-table-test.sql

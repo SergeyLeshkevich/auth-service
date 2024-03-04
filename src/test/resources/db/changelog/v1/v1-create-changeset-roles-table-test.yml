@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1-1
+      author: Sergey Leshkevich
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+                    nullable: false
+              - column:
+                  name: role
+                  type: nvarchar(255)
+                  constraints:
+                    nullable: false
