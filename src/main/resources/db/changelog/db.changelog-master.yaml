@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: v1/v1-create-changeset-users-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/v1-insert-changeset-users-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/v1-create-changeset-roles-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/v1-insert-changeset-roles-table.yml
+      relativeToChangelogFile: true
