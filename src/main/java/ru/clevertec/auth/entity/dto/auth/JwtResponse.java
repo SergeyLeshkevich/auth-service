@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @Data
 public class JwtResponse {
+
     private long id;
     private UUID uuid;
     private String username;

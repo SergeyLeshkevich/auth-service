@@ -16,7 +16,7 @@ import ru.clevertec.auth.entity.dto.auth.JwtResponse;
 import ru.clevertec.auth.entity.dto.user.UserRequest;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
 import ru.clevertec.auth.entity.dto.validation.OnCreate;
-import ru.clevertec.exceptionhandlerstarter.model.IncorrectData;
+import ru.clevertec.exceptionhandlerstarter.entity.IncorrectData;
 
 @Validated
 @RequestMapping("/auth")

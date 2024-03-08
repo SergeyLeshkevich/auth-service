@@ -1,0 +1,14 @@
+ru.clevertec.auth
+ru.clevertec.auth.config
+ru.clevertec.auth.controller
+ru.clevertec.auth.entity.dto.auth
+ru.clevertec.auth.entity.dto.user
+ru.clevertec.auth.entity.dto.validation
+ru.clevertec.auth.entity.user
+ru.clevertec.auth.mapper
+ru.clevertec.auth.repository
+ru.clevertec.auth.security
+ru.clevertec.auth.service
+ru.clevertec.auth.service.impl
+ru.clevertec.auth.service.props
+ru.clevertec.auth.util

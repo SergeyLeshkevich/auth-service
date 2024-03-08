@@ -53,7 +53,6 @@ public class ApplicationConfig {
      *
      * @param configuration the authentication configuration.
      * @return an AuthenticationManager instance.
-     * @throws Exception if an error occurs during configuration.
      */
     @Bean
     @SneakyThrows
@@ -92,7 +91,6 @@ public class ApplicationConfig {
      *
      * @param httpSecurity the HttpSecurity to configure.
      * @return a SecurityFilterChain instance.
-     * @throws Exception if an error occurs during configuration.
      */
     @Bean
     @SneakyThrows

@@ -20,7 +20,7 @@ import ru.clevertec.auth.entity.dto.user.UserResponse;
 import ru.clevertec.auth.entity.dto.validation.OnCreate;
 import ru.clevertec.auth.entity.dto.validation.OnUpdate;
 import ru.clevertec.auth.entity.user.Role;
-import ru.clevertec.exceptionhandlerstarter.model.IncorrectData;
+import ru.clevertec.exceptionhandlerstarter.entity.IncorrectData;
 
 @Validated
 @RequestMapping("/users")
@@ -35,7 +35,7 @@ public interface UserController {
             value = {
                     @ApiResponse(responseCode = "200", description = "User successfully updated"),
                     @ApiResponse(
-                            responseCode = "400",//TODO проверить статус
+                            responseCode = "400",
                             description = "Invalid request body or input parameter",
                             content = @Content(schema = @Schema(implementation = IncorrectData.class))),
                     @ApiResponse(
@@ -103,7 +103,7 @@ public interface UserController {
                             description = "User by ID not found",
                             content = @Content(schema = @Schema(implementation = IncorrectData.class))),
                     @ApiResponse(
-                            responseCode = "400",//TODO проверить статус
+                            responseCode = "400",
                             description = "Payload is incorrect: malformed, missing mandatory attributes etc",
                             content = @Content(schema = @Schema(implementation = IncorrectData.class))),
                     @ApiResponse(

@@ -3,7 +3,7 @@ package ru.clevertec.auth.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.auth.entity.dto.user.UserRequest;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
 import ru.clevertec.auth.service.AuthService;
@@ -12,7 +12,6 @@ import ru.clevertec.auth.entity.dto.auth.JwtRequest;
 import ru.clevertec.auth.entity.dto.auth.JwtResponse;
 
 @Validated
-//@CrossOrigin                                                                  //TODO
 @RestController
 @RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController{

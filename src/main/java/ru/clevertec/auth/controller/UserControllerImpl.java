@@ -2,7 +2,7 @@ package ru.clevertec.auth.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 import ru.clevertec.auth.entity.dto.user.UserRequest;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
 import ru.clevertec.auth.entity.user.Role;
@@ -10,7 +10,6 @@ import ru.clevertec.auth.service.UserViewService;
 
 
 @Validated
-//@CrossOrigin                                                                  //TODO
 @RestController
 @RequiredArgsConstructor
 public class UserControllerImpl implements UserController{
