@@ -7,14 +7,14 @@ databaseChangeLog:
             tableName: roles
             columns:
               - column:
-                  name: user_id
+                  name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
-                    foreignKeyName: fk_user_id
-                    references: users(id)
+                    primaryKey: true
                     nullable: false
               - column:
-                  name: role
+                  name: name
                   type: nvarchar(255)
                   constraints:
                     nullable: false

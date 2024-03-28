@@ -1,0 +1,24 @@
+spring:
+  jpa:
+    generate-ddl: 'false'
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+  datasource:
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5434/nms_auth_service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
+aop:
+  logging:
+    enabled: true
+
+exception:
+  handling:
+    enabled: true

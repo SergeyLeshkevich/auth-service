@@ -13,6 +13,7 @@ import ru.clevertec.auth.service.UserInnerService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -47,7 +48,8 @@ public class JwtUserDetailsService implements UserDetailsService {
      * @param user the user object to create a JwtEntity from.
      * @return JwtEntity containing user's ID, UUID, username, name, password, and authorities.
      */
-    public JwtEntity create(User user) {
+    private JwtEntity create(User user) {
+        Set<Role> roles = user.getRoles();
         return JwtEntity.builder()
                 .id(user.getId())
                 .uuid(user.getUuid())
@@ -66,7 +68,7 @@ public class JwtUserDetailsService implements UserDetailsService {
      */
     private List<GrantedAuthority> mapToGrantedAuthorities(List<Role> roles) {
         return roles.stream()
-                .map(Enum::name)
+                .map(Role::getName)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

@@ -65,7 +65,7 @@ public class JwtTokenProvider {
                 .add("roles", resolveRoles(roles))
                 .build();
         Instant validity = Instant.now()
-                .plus(jwtProperties.getAccess(), ChronoUnit.HOURS);
+                .plus(jwtProperties.getAccess(), ChronoUnit.MILLIS);
         return Jwts.builder()
                 .claims(claims)
                 .expiration(Date.from(validity))
@@ -81,7 +81,7 @@ public class JwtTokenProvider {
      */
     private List<String> resolveRoles(final Set<Role> roles) {
         return roles.stream()
-                .map(Enum::name)
+                .map(Role::getName)
                 .collect(Collectors.toList());
     }
 
@@ -98,7 +98,7 @@ public class JwtTokenProvider {
                 .add("id", userId)
                 .build();
         Instant validity = Instant.now()
-                .plus(jwtProperties.getRefresh(), ChronoUnit.DAYS);
+                .plus(jwtProperties.getRefresh(), ChronoUnit.MILLIS);
         return Jwts.builder()
                 .claims(claims)
                 .expiration(Date.from(validity))
@@ -122,7 +122,7 @@ public class JwtTokenProvider {
         jwtResponse.setUuid(user.getUuid());
         jwtResponse.setId(userId);
         jwtResponse.setUsername(user.getUsername());
-        jwtResponse.setRoles(user.getRoles().stream().map(Enum::name).collect(Collectors.toSet()));
+        jwtResponse.setRoles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
         jwtResponse.setAccessToken(
                 createAccessToken(userId, user.getUsername(), user.getRoles())
         );
@@ -148,7 +148,7 @@ public class JwtTokenProvider {
         jwtResponse.setId(userId);
         jwtResponse.setUuid(user.getUuid());
         jwtResponse.setUsername(user.getUsername());
-        jwtResponse.setRoles(user.getRoles().stream().map(Enum::name).collect(Collectors.toSet()));
+        jwtResponse.setRoles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
         jwtResponse.setAccessToken(token);
         return jwtResponse;
     }

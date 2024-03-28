@@ -5,14 +5,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.clevertec.auth.entity.user.Role;
-import ru.clevertec.auth.entity.user.User;
-import ru.clevertec.auth.repository.UserRepository;
-import ru.clevertec.auth.service.UserInnerService;
-import ru.clevertec.auth.service.UserViewService;
 import ru.clevertec.auth.entity.dto.user.UserRequest;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
+import ru.clevertec.auth.entity.user.Role;
+import ru.clevertec.auth.entity.user.User;
 import ru.clevertec.auth.mapper.UserMapper;
+import ru.clevertec.auth.repository.UserRepository;
+import ru.clevertec.auth.service.RoleService;
+import ru.clevertec.auth.service.UserInnerService;
+import ru.clevertec.auth.service.UserViewService;
 import ru.clevertec.exceptionhandlerstarter.exception.EntityNotFoundException;
 import ru.clevertec.exceptionhandlerstarter.exception.UniqueUsernameException;
 
@@ -33,6 +34,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserInnerService, UserViewService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
@@ -111,6 +113,9 @@ public class UserServiceImpl implements UserInnerService, UserViewService {
     public UserResponse create(UserRequest userRequest, Role role) {
         validate(userRequest.username(), userRequest);
 
+        Role roleSubscriber = roleService.getByName(Role.ROLE_SUBSCRIBER);
+        Role roleRequest = roleService.getByName(role.getName());
+
         UUID uuid;
         do {
             uuid = UUID.randomUUID();
@@ -121,7 +126,7 @@ public class UserServiceImpl implements UserInnerService, UserViewService {
                 .uuid(uuid)
                 .username(userRequest.username())
                 .password(passwordEncoder.encode(userRequest.passwordConfirmation()))
-                .roles(Set.of(role,Role.ROLE_SUBSCRIBER))
+                .roles(Set.of(roleSubscriber,roleRequest))
                 .build();
 
         return userMapper.toDto(userRepository.save(user));
@@ -137,6 +142,8 @@ public class UserServiceImpl implements UserInnerService, UserViewService {
     public UserResponse createWithRoleSubscriber(UserRequest userRequest) {
         validate(userRequest.name(), userRequest);
 
+        Role roleSubscriber = roleService.getByName(Role.ROLE_SUBSCRIBER);
+
         UUID uuid;
         do {
             uuid = UUID.randomUUID();
@@ -147,7 +154,7 @@ public class UserServiceImpl implements UserInnerService, UserViewService {
                 .uuid(uuid)
                 .username(userRequest.username())
                 .password(passwordEncoder.encode(userRequest.passwordConfirmation()))
-                .roles(Set.of(Role.ROLE_SUBSCRIBER))
+                .roles(Set.of(roleSubscriber))
                 .build();
 
         return userMapper.toDto(userRepository.save(user));

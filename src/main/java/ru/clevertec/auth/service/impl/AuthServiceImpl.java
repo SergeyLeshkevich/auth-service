@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import ru.clevertec.auth.entity.user.Role;
 import ru.clevertec.auth.entity.user.User;
 import ru.clevertec.auth.service.AuthService;
 import ru.clevertec.auth.service.UserInnerService;
@@ -46,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
         jwtResponse.setId(user.getId());
         jwtResponse.setUuid(user.getUuid());
         jwtResponse.setUsername(user.getUsername());
-        jwtResponse.setRoles(user.getRoles().stream().map(Enum::name).collect(Collectors.toSet()));
+        jwtResponse.setRoles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
         jwtResponse.setAccessToken(jwtTokenProvider.createAccessToken(
                 user.getId(), user.getUsername(), user.getRoles())
         );

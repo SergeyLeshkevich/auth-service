@@ -11,3 +11,9 @@ databaseChangeLog:
   - include:
       file: v1/v1-insert-changeset-roles-table.yml
       relativeToChangelogFile: true
+  - include:
+      file: v1/v1-create-changeset-user_role-table.yml
+      relativeToChangelogFile: true
+  - include:
+      file: v1/v1-insert-changeset-user_role-table.yml
+      relativeToChangelogFile: true

@@ -1,8 +1,8 @@
 package ru.clevertec.auth.mapper;
 
 import org.mapstruct.Mapper;
-import ru.clevertec.auth.entity.user.User;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
+import ru.clevertec.auth.entity.user.User;
 
 
 /**

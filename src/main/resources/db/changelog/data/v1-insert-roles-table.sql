@@ -1,24 +1,4 @@
-insert into roles (user_id, role)
-values (1, 'ROLE_ADMIN'),
-       (1,'ROLE_SUBSCRIBER'),
-       (2,'ROLE_SUBSCRIBER'),
-       (2, 'ROLE_JOURNALIST'),
-       (3, 'ROLE_JOURNALIST'),
-       (3, 'ROLE_SUBSCRIBER'),
-       (4, 'ROLE_SUBSCRIBER'),
-       (5, 'ROLE_SUBSCRIBER'),
-       (6, 'ROLE_SUBSCRIBER'),
-       (7, 'ROLE_SUBSCRIBER'),
-       (8, 'ROLE_SUBSCRIBER'),
-       (9, 'ROLE_SUBSCRIBER'),
-       (10, 'ROLE_SUBSCRIBER'),
-       (11, 'ROLE_SUBSCRIBER'),
-       (12, 'ROLE_SUBSCRIBER'),
-       (13, 'ROLE_SUBSCRIBER'),
-       (14, 'ROLE_SUBSCRIBER'),
-       (15, 'ROLE_SUBSCRIBER'),
-       (16, 'ROLE_SUBSCRIBER'),
-       (17, 'ROLE_SUBSCRIBER'),
-       (18, 'ROLE_SUBSCRIBER'),
-       (19, 'ROLE_SUBSCRIBER'),
-       (20, 'ROLE_SUBSCRIBER');
+insert into roles (name)
+values ('ROLE_ADMIN'),
+       ('ROLE_SUBSCRIBER'),
+       ('ROLE_JOURNALIST')
