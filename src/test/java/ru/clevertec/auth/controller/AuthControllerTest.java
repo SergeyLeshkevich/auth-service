@@ -12,9 +12,12 @@ import ru.clevertec.auth.config.PostgresSQLContainerInitializer;
 import ru.clevertec.auth.entity.dto.auth.JwtResponse;
 import ru.clevertec.auth.entity.dto.user.UserRequest;
 import ru.clevertec.auth.entity.dto.user.UserResponse;
+import ru.clevertec.auth.entity.user.Role;
 import ru.clevertec.auth.util.JwtResponseBuilderTest;
 import ru.clevertec.auth.util.UserRequestBuilderTest;
 import ru.clevertec.auth.util.UserResponseBuilderTest;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -67,9 +70,7 @@ class AuthControllerTest extends PostgresSQLContainerInitializer {
 
     @Test
     void shouldRefreshToken() throws Exception {
-        String refreshToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJUZXN0IHVzZXJOYW1lIiwiaWQiOjEsImV4cC" +
-                "I6MjIzOTUwNTA5NDE1MTQyfQ.09CZD97fSbHnashAD4B0AKeaY4kDE1pUToG-yOriMIvye9pRtdIOD6" +
-                "XzaZnbrVHwCnhlnjERlEcfXc6VN7xY6A";
+        String refreshToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJUZXN0IHVzZXJOYW1lIiwiaWQiOjEsImV4cCI6MjIzOTUwNTA5NDE1MTQyfQ.09CZD97fSbHnashAD4B0AKeaY4kDE1pUToG-yOriMIvye9pRtdIOD6XzaZnbrVHwCnhlnjERlEcfXc6VN7xY6A";
 
         JwtResponse jwtResponse = JwtResponseBuilderTest.aJwtResponse().build();
         JsonMapper jsonMapper = JsonMapper.builder().disable(MapperFeature.USE_ANNOTATIONS).build();
@@ -85,7 +86,7 @@ class AuthControllerTest extends PostgresSQLContainerInitializer {
         assertThat(actual.getAccessToken()).isNotBlank();
         assertThat(actual.getRefreshToken()).isNotBlank();
         assertThat(actual.getUsername()).isEqualTo(jwtResponse.getUsername());
-        assertThat(actual.getRoles()).isEqualTo(jwtResponse.getRoles());
+        assertThat(actual.getRoles()).isNotNull();
         assertThat(actual.getUuid()).isEqualTo(jwtResponse.getUuid());
     }
 

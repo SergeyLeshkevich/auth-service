@@ -110,11 +110,11 @@ public class UserServiceImpl implements UserInnerService, UserViewService {
      */
     @Override
     @Transactional
-    public UserResponse create(UserRequest userRequest, Role role) {
+    public UserResponse create(UserRequest userRequest, String role) {
         validate(userRequest.username(), userRequest);
 
         Role roleSubscriber = roleService.getByName(Role.ROLE_SUBSCRIBER);
-        Role roleRequest = roleService.getByName(role.getName());
+        Role roleRequest = roleService.getByName(role);
 
         UUID uuid;
         do {

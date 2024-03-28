@@ -1,20 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: v1-1
+      id: v1-3
       author: Sergey Leshkevich
       changes:
         - createTable:
-            tableName: roles
+            tableName: user_role
             columns:
               - column:
-                  name: id
+                  name: role_id
                   type: bigint
-                  autoIncrement: true
                   constraints:
-                    primaryKey: true
+                    foreignKeyName: fk_role_id
+                    references: roles(id)
                     nullable: false
               - column:
-                  name: name
-                  type: nvarchar(255)
+                  name: user_id
+                  type: bigint
                   constraints:
+                    foreignKeyName: fk_user_id
+                    references: users(id)
                     nullable: false

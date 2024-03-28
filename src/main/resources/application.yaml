@@ -1,10 +1,20 @@
 spring:
+  jpa:
+    generate-ddl: 'false'
+    database: postgresql
+    hibernate:
+      ddl-auto: none
   main:
     allow-circular-references: true
   application:
     name: auth-service
   profiles:
     active: prod
+  datasource:
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/nms_auth_service
 
 server:
   port: 9090

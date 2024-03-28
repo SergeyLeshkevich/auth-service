@@ -21,7 +21,7 @@ public class UserTestBuilderTest implements TestBuilder<User> {
     private String name = "Test name";
     private String password = "100";
     private String passwordConfirmation = "100";
-    private Role role = Role.ROLE_ADMIN;
+    private Role role = RoleTestBuilder.aRole().build();
     private Set<Role> roles = new HashSet<>();
 
     @Override

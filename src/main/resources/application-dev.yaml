@@ -1,15 +1,3 @@
-spring:
-  jpa:
-    generate-ddl: 'false'
-    database: postgresql
-    hibernate:
-      ddl-auto: none
-  datasource:
-    password: admin
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    url: jdbc:postgresql://localhost:5432/nms_auth_service
-
 eureka:
   client:
     service-url:

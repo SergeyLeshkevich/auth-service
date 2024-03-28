@@ -15,6 +15,7 @@ import ru.clevertec.auth.entity.user.Role;
 import ru.clevertec.auth.entity.user.User;
 import ru.clevertec.auth.repository.UserRepository;
 import ru.clevertec.auth.service.impl.UserServiceImpl;
+import ru.clevertec.auth.util.RoleTestBuilder;
 import ru.clevertec.auth.util.UserRequestBuilderTest;
 import ru.clevertec.auth.util.UserResponseBuilderTest;
 import ru.clevertec.auth.util.UserTestBuilderTest;
@@ -40,6 +41,9 @@ class UserServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private RoleService roleService;
 
     @Mock
     private UserMapper userMapper;
@@ -207,16 +211,19 @@ class UserServiceTest {
     void shouldCreateUserSuccessfully() {
         // given
         UserRequest userRequest = UserRequestBuilderTest.aUserRequest().build();
-        Role role = Role.ROLE_ADMIN;
+        Role role = RoleTestBuilder.aRole().build();
+        Role roleSubscriber = Role.builder().name("ROLE_SUBSCRIBER").build();
         User user = UserTestBuilderTest.anUser().build();
         UserResponse expectedResponse = UserResponseBuilderTest.aUserResponse().build();
+        given(roleService.getByName("ROLE_SUBSCRIBER")).willReturn(roleSubscriber);
+        given(roleService.getByName("ROLE_ADMIN")).willReturn(role);
         given(userRepository.findByUsername(userRequest.username())).willReturn(Optional.empty());
         given(passwordEncoder.encode(userRequest.passwordConfirmation())).willReturn("100");
         given(userMapper.toDto(user)).willReturn(expectedResponse);
         given(userRepository.save(any(User.class))).willReturn(user);
 
         // when
-        UserResponse actualResponse = userService.create(userRequest, role);
+        UserResponse actualResponse = userService.create(userRequest, Role.ROLE_ADMIN);
 
         // then
         assertThat(actualResponse).isEqualTo(expectedResponse);
@@ -232,10 +239,10 @@ class UserServiceTest {
     void shouldThrowIllegalArgumentExceptionWhenPasswordsDoNotMatch() {
         // given
         UserRequest userRequest = UserRequestBuilderTest.aUserRequest().withPasswordConfirmation("200").build();
-        Role role = Role.ROLE_ADMIN;
+        Role role = RoleTestBuilder.aRole().build();
 
         // when
-        Throwable thrown = catchThrowable(() -> userService.create(userRequest, role));
+        Throwable thrown = catchThrowable(() -> userService.create(userRequest, Role.ROLE_ADMIN));
 
         // then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class)
@@ -247,7 +254,9 @@ class UserServiceTest {
         // given
         UserRequest userRequest = UserRequestBuilderTest.aUserRequest().build();
         User user = UserTestBuilderTest.anUser().build();
+        Role roleSubscriber = Role.builder().name("ROLE_SUBSCRIBER").build();
         UserResponse expectedResponse = UserResponseBuilderTest.aUserResponse().build();
+        given(roleService.getByName("ROLE_SUBSCRIBER")).willReturn(roleSubscriber);
         given(userRepository.findByUsername("Test name")).willReturn(Optional.empty());
         given(passwordEncoder.encode(userRequest.passwordConfirmation())).willReturn("encodedPassword");
         given(userMapper.toDto(user)).willReturn(expectedResponse);
@@ -263,7 +272,7 @@ class UserServiceTest {
         assertThat(savedUser.getName()).isEqualTo(userRequest.name());
         assertThat(savedUser.getUsername()).isEqualTo(userRequest.username());
         assertThat(savedUser.getPassword()).isEqualTo("encodedPassword");
-        assertThat(savedUser.getRoles()).containsOnly(Role.ROLE_SUBSCRIBER);
+        assertThat(savedUser.getRoles()).containsOnly(roleSubscriber);
     }
 
     @Test

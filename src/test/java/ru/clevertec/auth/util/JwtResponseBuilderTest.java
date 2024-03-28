@@ -18,11 +18,12 @@ public class JwtResponseBuilderTest implements TestBuilder<JwtResponse> {
     private Long id = 1L;
     private UUID uuid = UUID.fromString("0bdc4d34-af90-4b42-bba6-f588323c87d7");
     private String userName = "Test userName";
-    private Role role = Role.ROLE_ADMIN;
+    private Role role = Role.builder().build();
     private Set<String> roles = new HashSet<>();
+
     @Override
     public JwtResponse build() {
-        roles.add(role.name());
+        roles.add(role.getName());
         JwtResponse jwtResponse = new JwtResponse();
         jwtResponse.setUuid(uuid);
         jwtResponse.setId(id);

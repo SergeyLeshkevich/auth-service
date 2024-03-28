@@ -67,7 +67,7 @@ public interface UserController {
                             content = @Content(schema = @Schema(implementation = IncorrectData.class)))
             })
     @PostMapping
-    UserResponse create(@Validated(OnCreate.class) @RequestBody UserRequest dto, @Param("role") Role role);
+    UserResponse create(@Validated(OnCreate.class) @RequestBody UserRequest dto, @Param("role") String role);
 
     @Operation(
             summary = "Get user by ID",

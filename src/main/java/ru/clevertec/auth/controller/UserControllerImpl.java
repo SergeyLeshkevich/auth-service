@@ -23,7 +23,7 @@ public class UserControllerImpl implements UserController{
     }
 
     @Override
-    public UserResponse create(UserRequest dto,Role role) {
+    public UserResponse create(UserRequest dto,String role) {
         return userService.create(dto,role);
     }
 
